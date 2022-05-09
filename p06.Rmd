@@ -1,5 +1,68 @@
 ---
 title: "Portfolio 6"
+author: "Rachel Good"
+date: "`r Sys.Date()`"
 ---
 
-> The projects should be numbered consecutively (i.e., in the order in which you began them), and should include for each project a description of the goal, the product (computer program, hand graph, computer graph, etc.), the data, and some interpretation. Reports must be reproducible and of high quality in terms of writing, grammar, presentation, etc.
+The goal of this portfolio is to learn how to loop in R. I am using one of the activities from my Python class as a model for what I should learn. I am going to see what the major differences (if any) there are in loops between Python and R.
+
+### First Exercise
+
+Python code to model:
+# define a loop variable
+i = 0
+# create a while statement with a Boolean expression
+while i < 3:
+  print(i)
+  # update loop variable to avoid infinite loop
+  i = i + 1
+  
+```{r loop1}
+i <- 0
+while (i < 3) {
+  print(i)
+  i <- i + 1
+}
+```
+
+### Second Exercise
+
+Python code to model:
+num_input = int(input())
+# define a loop variable
+i = 0
+# create a while statement with a Boolean expression
+while i <= num_input:
+  print(i)
+  i += 1
+
+  # update loop variable to avoid infinite loop
+
+
+This is the first time I have learned how to ask for an input in R. It's interesting to compare this to Python as in Python the function "readlines" is used to read lines from a file to output as a list by line, rather than a running string.
+
+While loops in general seem very similar between R and Python, the major difference is just formatting i.e., having to use parentheses for the while statement, using braces instead of a colon to signal the code to perform during the while loop.
+```{r loop2}
+num_input = readline()
+num_input = as.integer(num_input)
+i <- 0
+while (i < num_input) {
+  print(i)
+  i <- i + 1
+}
+```
+
+### Third Exercise
+
+Python code to model:
+my_list = ['a', 'b', 'c']
+# find length of my_list
+length = len(my_list)
+# define a loop variable
+i = 0
+# create a while statement with a Boolean expression
+while i <= length:
+  print(i)
+  i += 1
+
+  # update loop variable to avoid infinite loop
