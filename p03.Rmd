@@ -4,4 +4,32 @@ author: "Rachel Good"
 date: "`r Sys.Date()`"
 ---
 
-> The projects should be numbered consecutively (i.e., in the order in which you began them), and should include for each project a description of the goal, the product (computer program, hand graph, computer graph, etc.), the data, and some interpretation. Reports must be reproducible and of high quality in terms of writing, grammar, presentation, etc.
+The goal of Portfolio 3 is to find a model that best predicts grad school admission.
+
+```{r load_data}
+library(tidyverse)
+library(dplyr)
+library(broom)
+library(openintro)
+grad <- read_csv("C:/Users/rgood28/Documents/Data Sci Labs/template_portfolio/grad_school_data.csv")
+```
+
+```{r change_colnames}
+colnames(grad) <- c("serial", "gre_score", "toefl_score", "uni_rating", "statement", "recommendations", "cgpa", "research", "chance_admit")
+```
+
+r-squared = .762
+```{r model1}
+coa_gpa <- lm(chance_admit ~ cgpa, data = grad)
+summary(coa_gpa)
+```
+r-squared = .6433
+```{r model2}
+coa_gre <- lm(chance_admit ~ gre_score, data = grad)
+summary(coa_gre)
+```
+r-squared = .78
+```{r model3}
+coa_gpa_gre <- lm(chance_admit ~ cgpa + gre_score, data = grad)
+summary(coa_gpa_gre)
+```
