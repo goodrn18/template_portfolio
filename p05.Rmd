@@ -2,4 +2,63 @@
 title: "Portfolio 5"
 ---
 
-> The projects should be numbered consecutively (i.e., in the order in which you began them), and should include for each project a description of the goal, the product (computer program, hand graph, computer graph, etc.), the data, and some interpretation. Reports must be reproducible and of high quality in terms of writing, grammar, presentation, etc.
+The purpose of this project is to work with data visualizations for new data, and manipulating the data frame in order to show what I want to know. It's mainly just me playing around with data so I can become more comfortable with data frames and finding out what I can learn from the data and the visuals I can create.
+
+I also chose to play around with modeling the imdb star rating.
+
+Based on the models I created, I have a feeling that movie rating is mostly based on the plot line, quality of acting, and visual effects. None of which were included in the variables provided. There were too many actors listed to be able to figure out patterns in that data... at least not with my current skillset. 
+
+```{r load_data}
+library(tidyverse)
+library(dplyr)
+library(broom)
+library(openintro)
+library(ggplot2)
+imdb <- read_csv("C:/Users/rgood28/Documents/Data Sci Labs/extra_datafiles/data/imdb_1000.csv")
+```
+
+The first visual doesn't tell me much of anything, but the second model is easier to read. It does look like there is a subtle trend that longer movies tend to have higher ratings, but not always. 
+```{r visual1}
+ggplot(data = imdb, mapping = aes(star_rating, duration, color = genre))+
+  geom_jitter()
+
+ggplot(data = imdb, mapping = aes(star_rating, duration, color = genre))+
+  geom_jitter()+
+  facet_wrap(~genre)
+```
+This model is statistically significant however, it does not account for much of the variance in star_rating.
+
+```{r genre}
+rate_genre <- lm(star_rating ~ genre, data = imdb)
+summary(rate_genre)
+```
+
+Significant at a lower p-value and has slightly greater adjusted r-squared
+```{r duration}
+rate_duration <- lm(star_rating ~ duration, data = imdb)
+summary(rate_duration)
+```
+Also slightly higher r-squared. Here, I condensed the movie ratings since there was only 1 TV-MA rating, a couple NC-17, and then approved/passed, unrated/not rated. Doing this made the regression results easier to read and interpret... but doing this makes it look like all the ratings making the overall star-rating to decrease.
+```{r content_rating}
+imdb <- imdb %>% 
+  mutate(movie_rating = 
+           case_when(content_rating == "APPROVED" ~ "G",
+                     content_rating == "PASSED" ~ "G",
+                     content_rating == "G" ~ "G",
+                     content_rating == "PG" ~ "PG",
+                     content_rating == "PG-13" ~ "PG-13",
+                     content_rating == "TV-MA" ~ "R",
+                     content_rating == "NC-17" ~ "R",
+                     content_rating == "R" ~ "R",
+                     content_rating == "NOT RATED" ~ "R+",
+                     content_rating == "UNRATED" ~ "R+",
+                     content_rating == "X" ~ "R+"))
+
+rate_content <- lm(star_rating ~ movie_rating, data = imdb)
+summary(rate_content)
+```
+This increased the adjusted r-squared value and is still significant, but none of the predictors particularly stand out to me. 
+```{r multi_predictor}
+rate_content <- lm(star_rating ~ movie_rating + genre + duration, data = imdb)
+summary(rate_content)
+```

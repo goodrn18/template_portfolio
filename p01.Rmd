@@ -2,11 +2,53 @@
 title: "Portfolio 1"
 ---
 
-> The projects should be numbered consecutively (i.e., in the order in which you began them), and should include for each project a description of the goal, the product (computer program, hand graph, computer graph, etc.), the data, and some interpretation. Reports must be reproducible and of high quality in terms of writing, grammar, presentation, etc.
-
-```{r load-packages, message=FALSE}
-library(tidyverse) 
-library(datasauRus)
+---
+title: "Portfolio 1"
+author: "Rachel Good"
+date: "`r Sys.Date()`"
+output: github_document
+---
+### I just copied and pasted the RMD file from the first portfolio that I submitted so that it would be here with the others.
+```{r load_data_packages}
+library(dplyr)
+library(ggplot2)
+data("ChickWeight")
 ```
 
-This portfolio was completed in a separate repo.
+
+```{r chickweight}
+summary(ChickWeight)
+```
+
+## Testing Different Plot Options
+
+Below I will display different ways to visualize the Chick Weight data, making comments on the effectiveness of the visual.
+
+Plot 1:
+This plot shows me the change in weight(y) by diet(x) over time (facet). Depending on what is more important to the researcher will determine what time of visual is best. If they want to know how each diet compares to the others at each time, this visual is a fairly good option.
+```{r plot1, echo=FALSE}
+ggplot(ChickWeight, mapping = aes(x = Diet, y = weight)) +
+  geom_point()+
+  facet_wrap(~Time)
+```
+Plot 2:
+This plot looks at the change in weight(y) over time(x) by each diet (facet). This option works better if the research wants to look specifically at the change in weight for each diet. 
+```{r plot2, echo=FALSE}
+ggplot(ChickWeight, mapping = aes(x = Time, y = weight)) +
+  geom_point()+
+  facet_wrap(~Diet)
+```
+
+Plot 3:
+This plot doesn't tell me much.
+```{r plot4, echo=FALSE}
+ggplot(ChickWeight, mapping = aes(x = Diet, y = weight, color = Time)) +
+  geom_violin()
+```
+
+Plot 4:
+This plot is good for distributions of weight within each diet, however does not tell us anything regarding the time variable
+```{r plot5_boxplot, echo=FALSE}
+ggplot(ChickWeight, mapping = aes(x = Diet, y = weight)) +
+  geom_boxplot()
+```
