@@ -4,13 +4,15 @@ author: "Rachel Good"
 date: "`r Sys.Date()`"
 ---
 
-The goal of Portfolio 3 is to find a model that best predicts grad school admission.
+The goal of Portfolio 3 is to find a model that best predicts grad school admission. Note: I got this data set from: https://github.com/justmarkham/pandas-videos
+
 
 ```{r load_data}
 library(tidyverse)
 library(dplyr)
 library(broom)
 library(openintro)
+library(ggplot2)
 grad <- read_csv("C:/Users/rgood28/Documents/Data Sci Labs/template_portfolio/grad_school_data.csv")
 ```
 
@@ -33,3 +35,33 @@ r-squared = .78
 coa_gpa_gre <- lm(chance_admit ~ cgpa + gre_score, data = grad)
 summary(coa_gpa_gre)
 ```
+r-squared = .7853
+```{r model4}
+coa_research <- lm(chance_admit ~ cgpa + gre_score + research, data = grad)
+summary(coa_research)
+```
+r-squared = .7894
+```{r model5}
+coa_toefl <- lm(chance_admit ~ cgpa + gre_score + research + toefl_score, data = grad)
+summary(coa_toefl)
+```
+r-squared = .791 so we will take
+```{r model6}
+coa_statement <- lm(chance_admit ~ cgpa + gre_score + research + toefl_score + statement, data = grad)
+summary(coa_statement)
+```
+r-squared = .7997
+```{r model7}
+coa_recommend <- lm(chance_admit ~ cgpa + gre_score + research + toefl_score + statement + recommendations, data = grad)
+summary(coa_recommend)
+```
+r-squared = .8
+After adding all predictors except serial number for obvious reasons, using all predictors in the model appears to explain the most variance. 
+Statement score and university rating do not appear to be significant predictors of admission chance. Cumulative GPA, recommendations, and research appear to have the highest influence on admission compared to the rest of the predictors, with cumulative GPA having the highest influence.
+```{r model8}
+coa_rating <- lm(chance_admit ~ cgpa + gre_score + research + toefl_score + statement + recommendations + uni_rating, data = grad)
+summary(coa_rating)
+```
+
+
+
