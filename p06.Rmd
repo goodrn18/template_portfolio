@@ -3,9 +3,10 @@ title: "Portfolio 6"
 author: "Rachel Good"
 date: "`r Sys.Date()`"
 ---
-### For Loops
+### While Loops
+Note: Because this code asks for input, you cannot knit the Rmd.
 
-The goal of this portfolio is to learn how to do for loops in R. I am using one of the activities from my Python class as a model for what I should learn. I am going to see what the major differences (if any) there are in loops between Python and R.
+The goal of this portfolio is to learn how to do while loops in R. I am using one of the activities from my Python class as a model for what I should learn. I am going to see what the major differences (if any) there are in loops between Python and R.
 
 ### Exercise 1
 
@@ -125,5 +126,56 @@ while (i <= 10) {
   }
   print(i)
   i <- i + 1
+}
+```
+
+### Exercise 6
+
+Python code to model:
+# define a loop variable
+word_input2 = input()
+
+# create a while statement with a Boolean expression
+while word_input2 != "stop":
+  print(word_input2)
+  word_input2 = input()
+
+  # update loop variable to avoid infinite loop
+  
+  
+I had to change the word from stop to done because stop is a command in the console so it was weird.
+```{r loop6}
+word_input2 <- readline()
+while (word_input2 != "done") {
+  print(word_input2)
+  word_input2 <- readline()
+}
+```
+
+### Exercise 7
+
+Python code to model:
+# create empty list
+my_list2 = []
+# find length of list
+
+# create a while statement with a Boolean expression
+while list_length < 3:
+  new_item = input()
+  my_list2.append(new_item)
+  # update list to avoid infinite loop
+  list_length = len(my_list2)
+  print(my_list2)
+  
+
+This chunk of code did not like me. This should work according to google, however it has become an infinite loop and every time I input something for new_item, the console says "NULL". I tried creating an empty list first then putting items in the list to start. Neither worked. I also tried to specify the index to add the new item to, even though that isn't required. Also did not work. I eventually gave up due to time.
+```{r loop7}
+my_list2 <- c(1)
+list_length <- length(my_list2)
+while (list_length < 5) {
+  new_item <- readline()
+  my_list2 <- append(my_list2, new_item, after = index)
+  list_length <- length(my_list2)
+  print(my_list2)
 }
 ```
