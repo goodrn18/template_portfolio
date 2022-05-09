@@ -2,4 +2,77 @@
 title: "Portfolio 4"
 ---
 
-> The projects should be numbered consecutively (i.e., in the order in which you began them), and should include for each project a description of the goal, the product (computer program, hand graph, computer graph, etc.), the data, and some interpretation. Reports must be reproducible and of high quality in terms of writing, grammar, presentation, etc.
+The purpose of this project is to work with data visualizations for new data, and manipulating the data frame in order to show what I want to know. It's mainly just me playing around with data so I can become more comfortable with data frames and finding out what I can learn from the data and the visuals I can create.
+
+Note: I got this data set from: https://github.com/justmarkham/pandas-videos
+
+```{r load_data}
+library(tidyverse)
+library(dplyr)
+library(broom)
+library(openintro)
+library(ggplot2)
+drinks <- read_csv("C:/Users/rgood28/Documents/Data Sci Labs/extra_datafiles/data/drinks.csv")
+```
+
+```{r beer_by_continent}
+ggplot(data = drinks, mapping = aes(continent, beer_servings))+
+  geom_col()+
+  labs(title = "Beer Servings by Continent")
+
+ggplot(data = drinks, mapping = aes(continent, wine_servings))+
+  geom_col()+
+  labs(title = "Wine Servings by Continent")
+
+ggplot(data = drinks, mapping = aes(continent, spirit_servings))+
+  geom_col()+
+  labs(title = "Spirit Servings by Continent")
+```
+
+```{r count_continent}
+ggplot(data = drinks, mapping = aes(continent))+
+  geom_bar()
+```
+
+
+I spent too much time trying to figure out how to reorder the columns so that they went in numerical order... that was the goal but I am running out of time, and this is only my 4th portfolio. So I changed to color to show beer_servings greater than 300... Germany and Ireland were among those unsurprisingly.
+
+```{r europe_beer}
+europe_beer <- drinks %>% filter(
+  continent == "Europe",
+  beer_servings > 100
+)
+
+ggplot(data = europe_beer, mapping = aes(country, beer_servings, fill = beer_servings> 300))+
+  geom_bar(stat = "identity")+
+  coord_flip()
+
+```
+
+Portugal, France, and Andorra drink the most wine. I am honestly surprised that Italy is not as high up.
+
+```{r europe_wine}
+europe_wine <- drinks %>% filter(
+  continent == "Europe",
+  wine_servings > 100
+)
+
+ggplot(data = europe_wine, mapping = aes(country, wine_servings, fill = wine_servings > 300))+
+  geom_bar(stat = "identity")+
+  coord_flip()
+
+```
+
+Belarus drinks the most liquor.
+
+
+```{r europe_spirit}
+europe_spirit <- drinks %>% filter(
+  continent == "Europe",
+  spirit_servings > 100
+)
+
+ggplot(data = europe_spirit, mapping = aes(country, spirit_servings, fill = spirit_servings > 300))+
+  geom_bar(stat = "identity")+
+  coord_flip()
+```
