@@ -3,10 +3,11 @@ title: "Portfolio 6"
 author: "Rachel Good"
 date: "`r Sys.Date()`"
 ---
+### For Loops
 
-The goal of this portfolio is to learn how to loop in R. I am using one of the activities from my Python class as a model for what I should learn. I am going to see what the major differences (if any) there are in loops between Python and R.
+The goal of this portfolio is to learn how to do for loops in R. I am using one of the activities from my Python class as a model for what I should learn. I am going to see what the major differences (if any) there are in loops between Python and R.
 
-### First Exercise
+### Exercise 1
 
 Python code to model:
 # define a loop variable
@@ -25,7 +26,7 @@ while (i < 3) {
 }
 ```
 
-### Second Exercise
+### Exercise 2
 
 Python code to model:
 num_input = int(input())
@@ -52,7 +53,7 @@ while (i < num_input) {
 }
 ```
 
-### Third Exercise
+### Exercise 3
 
 Python code to model:
 my_list = ['a', 'b', 'c']
@@ -66,3 +67,63 @@ while i <= length:
   i += 1
 
   # update loop variable to avoid infinite loop
+
+```{r loop3}
+my_list <- c('a', 'b', 'c')
+length <- length(my_list)
+i <- 0
+while (i < length) {
+  print(i)
+  i <- i + 1
+}
+```
+
+### Example 4
+
+Python code to model:
+word_input = input()
+# find length of word_input
+length1 = len(word_input)
+# define a loop variable
+i = 0
+# create a while statement with a Boolean expression
+while i <= length1:
+  print(i)
+  i += 1
+
+  # update loop variable to avoid infinite loop
+  
+```{r loop4}
+word_input = readline()
+word_length = str_length(word_input)
+i <- 0
+while (i <= word_length) {
+  print(i)
+  i <- i + 1
+}
+```
+
+### Exercise 5
+
+Python code to model:
+# define a loop variable
+i = 0
+# create a while statement with a Boolean expression
+while i <= 10:
+  # if loop variable is greater than 5, break from loop
+  if i > 5:
+    break
+  # update loop variable to avoid infinite loop
+  i += 1
+  print(i)
+  
+```{r loop5}
+i <- 0
+while (i <= 10) {
+  if (i > 5) {
+    break
+  }
+  print(i)
+  i <- i + 1
+}
+```
