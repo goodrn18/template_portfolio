@@ -4,6 +4,8 @@ author: "Rachel Good"
 date: "`r Sys.Date()`"
 ---
 
+NOTE: This portfolio will also not render when you try to knit it because it asks for input.
+
 The purpose of this portfolio is to remake the Blackjack Game from my python class.
 
 Python code:
