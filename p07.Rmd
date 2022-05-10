@@ -1,5 +1,108 @@
 ---
 title: "Portfolio 7"
+author: "Rachel Good"
+date: "`r Sys.Date()`"
 ---
 
-> The projects should be numbered consecutively (i.e., in the order in which you began them), and should include for each project a description of the goal, the product (computer program, hand graph, computer graph, etc.), the data, and some interpretation. Reports must be reproducible and of high quality in terms of writing, grammar, presentation, etc.
+### For Loops
+Note: Because this code asks for input, you cannot knit the Rmd.
+
+The goal of this portfolio is to learn how to do foor loops in R. I am using one of the activities from my Python class as a model for what I should learn. I am going to see what the major differences (if any) there are in loops between Python and R. 
+
+### Exercise 1:
+Python code to model:
+my_list = ['a', 'b', 'c']
+
+# create a for statement with a loop variable
+for i in my_list:
+  # print each element
+  print(i)
+  
+```{r loop1}
+for_list <- c('a', 'b', 'c')
+for (i in for_list) {
+  print(i)
+}
+```
+
+### Exercise 2
+Python code to model:
+my_list = [1, 2, 3]
+
+# create a for statement with a loop variable
+for num in my_list:
+  # multiply each element by 2
+  num *= 2
+  # print the product
+  print(num)
+  
+```{r loop2}
+num_list <- c(1, 2, 3)
+for (i in num_list) {
+  num = i * 2
+  print(num)
+}
+```
+
+### Exercise 3
+Python code to model:
+word = input()
+
+# create a for statement with a loop variable
+for chr in word:
+  #print the character
+  print(chr)
+ 
+ 
+In R, we have to split the string in order to iterate through each character, unlike in Python, it automatically iterates throught the characters in a string.  
+```{r loop3}
+my_str = readline()
+split_my_str <- strsplit(my_str, "")[[1]]
+
+for (i in split_my_str) {
+  print(i)
+}
+```
+
+### Exercise 4
+Python code to model:
+my_list = [1, 2, 3]
+
+# create a for statement with a loop variable
+for num in my_list:
+  # print out if each element is even or odd
+  if num % 2 == 0:
+    print('even')
+  if num % 2 != 0:
+    print('odd')
+
+
+The modulo factor in R is %%, but in python it's only %  
+```{r loop4}
+for (i in num_list) {
+  if (i %% 2 == 0) {
+    print('even')
+  } else {
+    print('odd')
+  }
+}
+```
+
+### Exercise 5
+Python code to model:
+# Loop through the range of numbers from 0 to 5 (including 5) and print each number
+# create a for statement with a loop variable using range(start, stop (not included), step)
+for i in range(6):
+  # print each number
+  print(i)
+  
+
+In Python, you have to add 1 to the range, so 6 for 1-5. 
+```{r loop5}
+for (i in 1:5) {
+  print(i)
+}
+```
+
+### Exercise 6
+Python code to model:

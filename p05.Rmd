@@ -1,5 +1,7 @@
 ---
 title: "Portfolio 5"
+author: "Rachel Good"
+date: "`r Sys.Date()`"
 ---
 
 The purpose of this project is to work with data visualizations for new data, and manipulating the data frame in order to show what I want to know. It's mainly just me playing around with data so I can become more comfortable with data frames and finding out what I can learn from the data and the visuals I can create.
