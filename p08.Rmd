@@ -55,7 +55,9 @@ while i <= num_rounds:
   player_counter = 0
   dealer_counter = 0
   
-  
+
+
+So, this didn't end up accepting a hit or stand input... but this was the best I could get in a reasonable amount of time spent on this portfolio.
 ```{r blackjack}
 player_name <- readline(prompt("Enter Player's Name:"))
 dealer_name <- readline(prompt("Enter Dealer's Name:"))
@@ -85,16 +87,33 @@ while (i < num_rounds) {
     p_output2 <- c("New player total:", p_counter)
     p_move <- readline(prompt("Enter hit or stand:"))
   }
-  d_move <- readline(prompt("Enter hit or stand:"))
-  while (d_move == "hit") {
+  
+  while (d_counter < 17) {
     d_card_add <- sample(1:11, 1)
     d_output <- c("Dealer drew", d_card_add)
     print(d_output)
     d_counter <- d_counter + d_card_add
     d_output2 <- c("New dealer total:", d_counter)
-    d_move <- readline(prompt("Enter hit or stand:"))
   }
-  
+  if (p_counter == 21){
+  result1 <- c(player_name, "wins")
+  print(result1)
+    } else if (p_counter > 21) {
+      result2 <- c(dealer_name, "wins")
+      print(result2)
+    } else if (d_counter > 21) {
+      result3 <- c(dealer_name, "busts,", player_name, "wins")
+      print(result3)
+    } else if ((p_counter > d_counter)&(p_counter <= 21)) {
+      result4 <- c(player_name, "wins")
+      print(result4)
+    } else if ((d_counter > p_counter)&(d_counter <= 21)) {
+      result5 <- c(dealer_name, "wins")
+      print(result5)
+  }
+  i <- i + 1
+  p_counter <- 0
+  d_counter <- 0
 }
 
 ```
