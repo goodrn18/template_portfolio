@@ -4,4 +4,97 @@ author: "Rachel Good"
 date: "`r Sys.Date()`"
 ---
 
-> The projects should be numbered consecutively (i.e., in the order in which you began them), and should include for each project a description of the goal, the product (computer program, hand graph, computer graph, etc.), the data, and some interpretation. Reports must be reproducible and of high quality in terms of writing, grammar, presentation, etc.
+The purpose of this portfolio is to remake the Blackjack Game from my python class.
+
+Python code:
+import random
+
+player_name = input("Enter player name:")
+dealer_name = input("Enter dealer name:")
+
+num_rounds = int(input("Enter number of rounds:"))
+i = 1
+while i <= num_rounds:
+  player_card1 = random.randint(1,11)
+  player_card2 = random.randint(1,11)
+
+  dealer_card1 = random.randint(1,11)
+  dealer_card2 = random.randint(1,11)
+
+  player_counter = player_card1 + player_card2
+  dealer_counter = dealer_card1 + dealer_card2
+
+  print("Player:", player_counter, "Dealer:", dealer_counter)
+
+  player_move = input("hit or stand?")
+  while player_move == "hit":
+    player_card_add = random.randint(1,11)
+    print(player_name, "drew", player_card_add)
+    player_counter += player_card_add
+    print("Player:", player_counter)
+    player_move = input("hit or stand?")
+    
+
+  while dealer_counter < 17:
+    dealer_card_add = random.randint(1,11)
+    print(dealer_name, "drew", dealer_card_add)
+    dealer_counter += dealer_card_add
+    print("Dealer:", dealer_counter)
+
+  if player_counter == 21:
+    print(player_name, "wins")
+  elif player_counter > 21:
+    print(dealer_name, "wins")
+  elif dealer_counter > 21:
+    print(dealer_name, "busts,", player_name, "wins")
+  elif player_counter > dealer_counter and player_counter <= 21:
+    print(player_name, "wins")
+  elif dealer_counter > player_counter and dealer_counter <= 21:
+      print(dealer_name, "wins")
+  i += 1
+  player_counter = 0
+  dealer_counter = 0
+  
+  
+```{r blackjack}
+player_name <- readline(prompt("Enter Player's Name:"))
+dealer_name <- readline(prompt("Enter Dealer's Name:"))
+
+num_rounds <- readline(prompt("Enter the number of rounds you wish to play:"))
+num_rounds <- as.integer(num_rounds)
+
+i<- 1
+while (i < num_rounds) {
+  p_card1 <- sample(1:11, 1)
+  p_card2 <- sample(1:11, 1)
+  p_counter <- p_card1 + p_card2
+  
+  d_card1 <- sample(1:11, 1)
+  d_card2 <- sample(1:11, 1)
+  d_counter <- d_card1 + d_card2
+  
+  output <- c("Player:", p_counter, "Dealer", d_counter)
+  print(output)
+  
+  p_move <- readline(prompt("Enter hit or stand:"))
+  while (p_move == "hit") {
+    p_card_add <- sample(1:11, 1)
+    p_output <- c("Player drew", p_card_add)
+    print(p_output)
+    p_counter <- p_counter + p_card_add
+    p_output2 <- c("New player total:", p_counter)
+    p_move <- readline(prompt("Enter hit or stand:"))
+  }
+  d_move <- readline(prompt("Enter hit or stand:"))
+  while (d_move == "hit") {
+    d_card_add <- sample(1:11, 1)
+    d_output <- c("Dealer drew", d_card_add)
+    print(d_output)
+    d_counter <- d_counter + d_card_add
+    d_output2 <- c("New dealer total:", d_counter)
+    d_move <- readline(prompt("Enter hit or stand:"))
+  }
+  
+}
+
+```
