@@ -4,4 +4,33 @@ author: "Rachel Good"
 date: "`r Sys.Date()`"
 ---
 
-> The projects should be numbered consecutively (i.e., in the order in which you began them), and should include for each project a description of the goal, the product (computer program, hand graph, computer graph, etc.), the data, and some interpretation. Reports must be reproducible and of high quality in terms of writing, grammar, presentation, etc.
+Attempting Lab from Module 12
+
+```{r load_packages}
+library(tidyverse) 
+library(infer)
+library(openintro)
+```
+
+```{r load_data}
+data(ncbirths)
+nrow(ncbirths)
+summary(ncbirths)
+```
+
+### Exercise 1
+
+Each case is a pregnancy case - so mom and baby. There are 1000 cases.
+Numerical: fage, mage, weeks, visits, gained, weight
+Categorical: Mature, premie, marital, lowbirthweight, gender, habit, whitemom
+Weight gained by the mother appears to have an outlier at 85 lbs. Birth weight has a low outlier at 1lb, and weeks at 20.
+
+### Exercise 2
+
+Average birth weight for babies of white moms: 7.25 lbs
+```{r white_moms}
+ncbirths_white <- ncbirths %>% 
+  filter(whitemom == "white")
+
+mean(ncbirths_white$weight, na.rm = TRUE)
+```
