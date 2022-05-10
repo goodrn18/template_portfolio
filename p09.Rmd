@@ -10,6 +10,7 @@ Attempting Lab from Module 12
 library(tidyverse) 
 library(infer)
 library(openintro)
+library(ggplot2)
 ```
 
 ```{r load_data}
@@ -33,4 +34,71 @@ ncbirths_white <- ncbirths %>%
   filter(whitemom == "white")
 
 mean(ncbirths_white$weight, na.rm = TRUE)
+```
+
+### Exercise 3
+So I got confused after exercise 2 while trying to do portfolios after midnight. So now I am just planning to play around with the data and see what I can do with it. I am diverting course from the lab though.
+
+Average birth weight for babies with non white mothers: 6.72 lbs
+```{r do_something}
+ncbirths_nonwhite <- ncbirths %>% 
+  filter(whitemom != "white")
+
+mean(ncbirths_nonwhite$weight, na.rm = TRUE)
+```
+
+```{r smokers}
+ggplot(data = ncbirths, mapping = aes(weeks, weight, color = habit))+
+  geom_jitter()
+
+ggplot(data = ncbirths, mapping = aes(weeks, weight, color = habit))+
+  geom_point()+
+  facet_wrap(~habit)
+```
+
+adjusted r-squared: .0038
+```{r smoker_model}
+m_smoker <- lm(weight ~ habit, data = ncbirths)
+summary(m_smoker)
+```
+```{r weeks}
+m_weeks <- lm(weight ~ weeks, data = ncbirths)
+summary(m_weeks)
+
+```
+```{r graph_regression}
+ggplot(data = ncbirths, mapping = aes(weeks, weight))+
+  geom_jitter()+
+  geom_abline(intercept = -6.09529, slope = .34433)
+```
+
+adjusted r-squared: .4542
+habit smoker now actually has a lesser p-value. Weeks is definitely predictive of weight. We wouldn't need to even add the variable about being a premie since weeks accounts for that.
+```{r smoker_weeks}
+smoker_weeks <- lm(weight ~ habit + weeks, data = ncbirths)
+summary(smoker_weeks)
+```
+
+adjusted r-squared: .4592
+```{r mage}
+m_mage <- lm(weight ~ habit + weeks + mage, data = ncbirths)
+summary(m_mage)
+```
+
+adjusted r-squared: .4595
+```{r mage}
+m_mage_gained <- lm(weight ~ habit + weeks + mage + gained, data = ncbirths)
+summary(m_mage_gained)
+```
+
+adjusted r-squared: .444 (so let's take out fage)
+```{r fage}
+m_fage <- lm(weight ~ habit + weeks + mage + gained + fage, data = ncbirths)
+summary(m_fage)
+```
+
+adjusted r-squared: .4646
+```{r white}
+m_white <- lm(weight ~ habit + weeks + mage + gained + whitemom, data = ncbirths)
+summary(m_white)
 ```
